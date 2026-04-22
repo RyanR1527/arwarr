@@ -10,6 +10,23 @@ const stmt = db.prepare(
 );
 res.json(stmt.all());
 });
+app.get('/artist', (req, res) => {
+const stmt = db.prepare(
+"SELECT * FROM Artist"
+);
+res.json(stmt.all());
+});
+app.get('/artists/:id/albums', (req, res) => {
+
+
+      const artistId = req.params.id;
+      const stmt = db.prepare(
+"SELECT * FROM Album WHERE ArtistId=?"
+);
+res.json(stmt.all(artistId));
+
+});
+
 app.listen(3000, () => {
 console.log("Server running on http://localhost:3000");
 });
